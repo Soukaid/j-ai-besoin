@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>J'ai Besoin - Donnez, Partagez, Aidez</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-container">
+                <div class="nav-brand">
+                    <i class="fas fa-heart"></i>
+                    <span>J'ai Besoin</span>
+                </div>
+                <div class="nav-menu" id="nav-menu">
+                    <a href="index.html" class="nav-link active">Accueil</a>
+                    <a href="search.html" class="nav-link">Rechercher</a>
+                    <a href="donate.html" class="nav-link">Donner</a>
+                    <a href="profile.html" class="nav-link">Mon Compte</a>
+                </div>
+                <div class="nav-toggle" id="nav-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">Donnez ce que vous n'utilisez plus, aidez ceux qui en ont besoin</h1>
+                <p class="hero-subtitle">Une plateforme solidaire pour donner une seconde vie à vos objets et créer du lien social dans votre quartier.</p>
+                <div class="hero-buttons">
+                    <a href="donate.html" class="btn btn-primary">
+                        <i class="fas fa-gift"></i>
+                        Je veux donner
+                    </a>
+                    <a href="search.html" class="btn btn-secondary">
+                        <i class="fas fa-search"></i>
+                        Je cherche quelque chose
+                    </a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="images/communauté solidaire.avif" alt="Communauté solidaire">
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">Comment ça marche ?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-camera"></i>
+                    </div>
+                    <h3>1. Photographiez</h3>
+                    <p>Prenez une photo de l'objet que vous souhaitez donner et ajoutez une description.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3>2. Localisez</h3>
+                    <p>Indiquez votre ville pour que les personnes intéressées puissent vous trouver facilement.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h3>3. Échangez</h3>
+                    <p>Communiquez directement avec les personnes intéressées via notre messagerie intégrée.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories">
+        <div class="container">
+            <h2 class="section-title">Catégories populaires</h2>
+            <div class="categories-grid">
+                <div class="category-card" data-category="vetements">
+                    <i class="fas fa-tshirt"></i>
+                    <span>Vêtements</span>
+                </div>
+                <div class="category-card" data-category="meubles">
+                    <i class="fas fa-couch"></i>
+                    <span>Meubles</span>
+                </div>
+                <div class="category-card" data-category="electronique">
+                    <i class="fas fa-laptop"></i>
+                    <span>Électronique</span>
+                </div>
+                <div class="category-card" data-category="livres">
+                    <i class="fas fa-book"></i>
+                    <span>Livres</span>
+                </div>
+                <div class="category-card" data-category="electromenager">
+                    <i class="fas fa-blender"></i>
+                    <span>Électroménager</span>
+                </div>
+                <div class="category-card" data-category="jouets">
+                    <i class="fas fa-gamepad"></i>
+                    <span>Jouets</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recent Donations -->
+    <section class="recent-donations">
+        <div class="container">
+            <h2 class="section-title">Derniers dons</h2>
+            <div class="donations-grid" id="recent-donations">
+                <!-- Les dons récents seront chargés ici via JavaScript -->
+            </div>
+            <div class="text-center">
+                <a href="search.html" class="btn btn-outline">Voir tous les dons</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-brand">
+                        <i class="fas fa-heart"></i>
+                        <span>J'ai Besoin</span>
+                    </div>
+                    <p>Une plateforme solidaire pour donner une seconde vie à vos objets.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="search.html">Rechercher</a></li>
+                        <li><a href="donate.html">Donner</a></li>
+                        <li><a href="profile.html">Mon Compte</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p><i class="fas fa-envelope"></i> contact@jaibesoin.ma</p>
+                    <p><i class="fas fa-phone"></i> +212 522 161 455</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 J'ai Besoin. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

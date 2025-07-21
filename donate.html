@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donner - J'ai Besoin</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-container">
+                <div class="nav-brand">
+                    <i class="fas fa-heart"></i>
+                    <span>J'ai Besoin</span>
+                </div>
+                <div class="nav-menu" id="nav-menu">
+                    <a href="index.html" class="nav-link">Accueil</a>
+                    <a href="search.html" class="nav-link">Rechercher</a>
+                    <a href="donate.html" class="nav-link active">Donner</a>
+                    <a href="profile.html" class="nav-link">Mon Compte</a>
+                </div>
+                <div class="nav-toggle" id="nav-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Donate Section -->
+    <section class="donate-section">
+        <div class="container">
+            <div class="donate-header">
+                <h1>Proposer un don</h1>
+                <p>Donnez une seconde vie à vos objets et aidez votre communauté</p>
+            </div>
+
+            <div class="donate-form-container">
+                <form id="donate-form" class="donate-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="item-title" class="form-label">
+                                <i class="fas fa-tag"></i>
+                                Titre de l'objet *
+                            </label>
+                            <input type="text" id="item-title" name="title" class="form-input" required 
+                                   placeholder="Ex: Canapé 3 places en bon état">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="item-category" class="form-label">
+                                <i class="fas fa-list"></i>
+                                Catégorie *
+                            </label>
+                            <select id="item-category" name="category" class="form-select" required>
+                                <option value="">Choisir une catégorie</option>
+                                <option value="vetements">Vêtements</option>
+                                <option value="meubles">Meubles</option>
+                                <option value="electronique">Électronique</option>
+                                <option value="livres">Livres</option>
+                                <option value="electromenager">Électroménager</option>
+                                <option value="jouets">Jouets</option>
+                                <option value="decoration">Décoration</option>
+                                <option value="sport">Sport</option>
+                                <option value="jardin">Jardin</option>
+                                <option value="autre">Autre</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="item-condition" class="form-label">
+                                <i class="fas fa-star"></i>
+                                État
+                            </label>
+                            <select id="item-condition" name="condition" class="form-select">
+                                <option value="excellent">Excellent</option>
+                                <option value="bon">Bon</option>
+                                <option value="correct">Correct</option>
+                                <option value="usage">Usagé</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="item-description" class="form-label">
+                                <i class="fas fa-align-left"></i>
+                                Description *
+                            </label>
+                            <textarea id="item-description" name="description" class="form-textarea" required
+                                      placeholder="Décrivez votre objet : dimensions, couleur, état, raison du don..."></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="item-photos" class="form-label">
+                                <i class="fas fa-camera"></i>
+                                Photos
+                            </label>
+                            <div class="photo-upload">
+                                <input type="file" id="item-photos" name="photos" multiple accept="image/*" class="photo-input">
+                                <div class="photo-upload-area" id="photo-upload-area">
+                                    <i class="fas fa-cloud-upload-alt"></i>
+                                    <p>Cliquez pour ajouter des photos ou glissez-déposez</p>
+                                    <small>Formats acceptés : JPG, PNG, GIF (max 5 photos)</small>
+                                </div>
+                                <div id="photo-preview" class="photo-preview"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="item-location" class="form-label">
+                                <i class="fas fa-map-marker-alt"></i>
+                                Localisation *
+                            </label>
+                            <input type="text" id="item-location" name="location" class="form-input" required
+                                   placeholder="Ville, code postal">
+                            <div id="location-map" class="map-container"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="contact-info" class="form-label">
+                                <i class="fas fa-envelope"></i>
+                                Contact
+                            </label>
+                            <input type="email" id="contact-info" name="contact" class="form-input"
+                                   placeholder="Votre email (optionnel si vous avez un compte)">
+                        </div>
+                        <div class="form-group">
+                            <label for="availability" class="form-label">
+                                <i class="fas fa-clock"></i>
+                                Disponibilité
+                            </label>
+                            <input type="text" id="availability" name="availability" class="form-input"
+                                   placeholder="Ex: Soirs et week-ends">
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" id="preview-btn">
+                            <i class="fas fa-eye"></i>
+                            Aperçu
+                        </button>
+                        <button type="submit" class="btn btn-primary" id="submit-btn">
+                            <i class="fas fa-gift"></i>
+                            Publier le don
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Preview Modal -->
+                <div id="preview-modal" class="modal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3>Aperçu de votre annonce</h3>
+                            <button class="modal-close" id="close-preview">&times;</button>
+                        </div>
+                        <div class="modal-body" id="preview-content">
+                            <!-- Le contenu de l'aperçu sera généré ici -->
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-secondary" id="edit-btn">Modifier</button>
+                            <button class="btn btn-primary" id="confirm-publish">Publier</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-brand">
+                        <i class="fas fa-heart"></i>
+                        <span>J'ai Besoin</span>
+                    </div>
+                    <p>Une plateforme solidaire pour donner une seconde vie à vos objets.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="search.html">Rechercher</a></li>
+                        <li><a href="donate.html">Donner</a></li>
+                        <li><a href="profile.html">Mon Compte</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p><i class="fas fa-envelope"></i> contact@jaibesoin.ma</p>
+                    <p><i class="fas fa-phone"></i>+212 522 161 455</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 J'ai Besoin. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="donate.js"></script>
+    <script src="script.js"></script>
+
+    <style>
+        .donate-section {
+            padding: 2rem 0 5rem;
+            background: var(--bg-secondary);
+            min-height: calc(100vh - 4rem);
+        }
+
+        .donate-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .donate-header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .donate-header p {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+        }
+
+        .donate-form-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .donate-form {
+            background: var(--bg-primary);
+            padding: 2rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .form-row .form-group:only-child {
+            grid-column: 1 / -1;
+        }
+
+        .form-label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .form-label i {
+            color: var(--primary-color);
+        }
+
+        .photo-upload {
+            position: relative;
+        }
+
+        .photo-input {
+            position: absolute;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        .photo-upload-area {
+            border: 2px dashed var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .photo-upload-area:hover,
+        .photo-upload-area.dragover {
+            border-color: var(--primary-color);
+            background: var(--bg-secondary);
+        }
+
+        .photo-upload-area i {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .photo-upload-area p {
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .photo-upload-area small {
+            color: var(--text-secondary);
+        }
+
+        .photo-preview {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .photo-item {
+            position: relative;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+        }
+
+        .photo-item img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+        }
+
+        .photo-remove {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            background: var(--error-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-light);
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: var(--bg-primary);
+            border-radius: var(--radius-lg);
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .modal-header h3 {
+            margin: 0;
+            color: var(--text-primary);
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-secondary);
+        }
+
+        .modal-body {
+            padding: 1.5rem;
+        }
+
+        .modal-footer {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+            padding: 1.5rem;
+            border-top: 1px solid var(--border-light);
+        }
+
+        .preview-card {
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+        }
+
+        .preview-images {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .preview-images img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: var(--radius-sm);
+        }
+
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .donate-form {
+                padding: 1.5rem;
+            }
+
+            .form-actions {
+                flex-direction: column;
+            }
+
+            .donate-header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</body>
+</html>
